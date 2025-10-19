@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "912018791389",
+    "project_id": "yetnew-home-device",
+    "storage_bucket": "yetnew-home-device.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912018791389:android:a2fc911869ed1e37803434",
+        "android_client_info": {
+          "package_name": "com.example.yetnew"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfpl23XDkxt3b_ccbPetUg_NzrsA7YXoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
