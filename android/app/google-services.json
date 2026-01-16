@@ -12,7 +12,12 @@
           "package_name": "com.example.yetnew"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "912018791389-r3bluv823110e3h99sf3l0roc9fh4acb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAfpl23XDkxt3b_ccbPetUg_NzrsA7YXoc"
@@ -20,7 +25,55 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912018791389-r3bluv823110e3h99sf3l0roc9fh4acb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "912018791389-p8a1nb590e2cm2q1mihrp4feqck2l9it.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yetnew"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912018791389:android:939824288ebb4bd5803434",
+        "android_client_info": {
+          "package_name": "com.example.yetnew_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912018791389-r3bluv823110e3h99sf3l0roc9fh4acb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfpl23XDkxt3b_ccbPetUg_NzrsA7YXoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912018791389-r3bluv823110e3h99sf3l0roc9fh4acb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "912018791389-p8a1nb590e2cm2q1mihrp4feqck2l9it.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yetnew"
+              }
+            }
+          ]
         }
       }
     }

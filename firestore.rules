@@ -1,0 +1,82 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isMember(householdId) {
+      return signedIn() &&
+          exists(/databases/$(database)/documents/households/$(householdId)/members/$(request.auth.uid));
+    }
+
+    function isAdmin(householdId) {
+      return isMember(householdId) &&
+          get(/databases/$(database)/documents/households/$(householdId)/members/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // User profile (stores householdId)
+    match /users/{userId} {
+      allow read, create, update, delete: if signedIn() && request.auth.uid == userId;
+    }
+
+    match /households/{householdId} {
+      // We use householdId == code for join-by-code without list queries.
+      allow create: if signedIn()
+          && request.resource.data.createdBy == request.auth.uid
+          && request.resource.data.code == householdId
+          && request.resource.data.name is string
+          && request.resource.data.code is string;
+
+      // Allow an authenticated user to GET a household doc by its id (the join code).
+      // Subcollections remain protected by isMember().
+      allow get: if signedIn();
+
+      // Do NOT allow listing all households.
+      allow list: if false;
+
+      allow update, delete: if isAdmin(householdId);
+
+      match /members/{memberId} {
+        allow get: if (signedIn() && request.auth.uid == memberId) || isMember(householdId);
+        allow list: if isMember(householdId);
+
+        // Create/join: user creates their own member doc.
+        // - admin is only allowed if they are also the household creator.
+        allow create: if signedIn()
+            && request.auth.uid == memberId
+            && request.resource.data.email is string
+            && request.resource.data.name is string
+            && request.resource.data.role in ['admin', 'member']
+            && (request.resource.data.role != 'admin'
+                || get(/databases/$(database)/documents/households/$(householdId)).data.createdBy == memberId);
+
+        // Member can update own presence/profile; admin can update anyone.
+        allow update: if (signedIn() && request.auth.uid == memberId) || isAdmin(householdId);
+
+        // Member can leave; admin can remove.
+        allow delete: if (signedIn() && request.auth.uid == memberId) || isAdmin(householdId);
+      }
+
+      match /devices/{deviceId} {
+        allow read: if isMember(householdId);
+        allow create, update, delete: if isMember(householdId);
+
+        match /history/{entryId} {
+          allow read, create: if isMember(householdId);
+          allow update, delete: if false;
+        }
+      }
+
+      match /storageBoxes/{boxId} {
+        allow read: if isMember(householdId);
+        allow create, update, delete: if isMember(householdId);
+      }
+
+      match /activity/{activityId} {
+        allow read, create: if isMember(householdId);
+        allow update, delete: if false;
+      }
+    }
+  }
+}

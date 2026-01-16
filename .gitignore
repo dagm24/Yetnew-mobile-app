@@ -43,3 +43,32 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# --- Sensitive / local-only configuration (DO NOT COMMIT) ---
+# Firebase config files (contain project identifiers / API keys)
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
+/macos/Runner/GoogleService-Info.plist
+
+# FlutterFire generated options (contains Firebase config)
+/lib/firebase_options.dart
+
+# Environment files
+.env
+.env.*
+
+# Signing keys / certificates
+**/*.jks
+**/*.keystore
+**/*.p12
+**/*.pem
+**/*.key
+**/*.crt
+**/*.cer
+**/*.mobileprovision
+
+# Android signing
+/android/key.properties
+
+# Local helper outputs
+/sha1_*.txt
